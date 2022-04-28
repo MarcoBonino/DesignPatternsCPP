@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
-set(CMAKE_CXX_STANDARD 20)
-project(Memento)
-add_executable(memento memento.cpp)
+
+project("Behavioral patterns")
+
+add_subdirectory(Chain_of_responsibility)
+add_subdirectory(Memento)
