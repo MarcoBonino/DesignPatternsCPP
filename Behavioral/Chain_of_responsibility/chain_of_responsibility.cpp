@@ -1,4 +1,6 @@
 #include <array>
+#include <cstring>
+#include <memory>
 #include <iostream>
 #include <tuple>
 #include <unordered_map>
