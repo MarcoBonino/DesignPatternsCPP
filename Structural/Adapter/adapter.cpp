@@ -42,7 +42,7 @@ struct IndustrialSocketInterface
 {
     // Up to several thousands of Volts...
     // Seems not working: https://stackoverflow.com/questions/13463048/c-how-to-multiple-inherits-from-interfaces-with-different-return-types
-    //virtual uint16_t voltage() = 0; 
+    //virtual uint16_t voltage() = 0;
     virtual uint16_t volt() const = 0;
     virtual STATUS phase1() const = 0;
     virtual STATUS phase2() const = 0;
@@ -89,8 +89,8 @@ public:
     uint8_t voltage() const override { return static_cast<uint8_t>(EuropeanIndustrialeSocket::volt()); }
     STATUS phase() const override { return EuropeanIndustrialeSocket::phase1(); }
     STATUS neutral() const override { return EuropeanIndustrialeSocket::neutral(); }
-    void deliverPower() const override     
-    { 
+    void deliverPower() const override
+    {
         EuropeanIndustrialeSocket::deliverPower();
         std::cout << "Adpter limits power to maximun 2300 Watt." << std::endl;
     }
@@ -155,15 +155,15 @@ int main()
     Phone phone;
 
     std::cout << "Charge from home:" << std::endl;
-    PhoneCharger* charger = new PhoneCharger();    
-    charger->plugIn(&homeSocket);
-    charger->plugPhone(&phone);
+    PhoneCharger charger;
+    charger.plugIn(&homeSocket);
+    charger.plugPhone(&phone);
 
     std::cout << "\nCharge from the fab:" << std::endl;
     EuropeanIndustrialeSocket industrialSocket(STATUS::CONNECTED, STATUS::CONNECTED, 380, true);
     //charger->plugIn(&industrialSocket); // do not compile: need an adapter!
     Adapter adpter(STATUS::CONNECTED);
-    charger->plugIn(&adpter);
+    charger.plugIn(&adpter);
 
     return 0;
 }
