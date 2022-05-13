@@ -4,3 +4,4 @@ project("Creational patterns")
 
 add_subdirectory(Abstract_factory)
 add_subdirectory(Builder)
+add_subdirectory(Prototype)
