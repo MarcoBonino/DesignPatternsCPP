@@ -6,7 +6,7 @@ class BankAccount
 {
     friend class BankAccountCommand;
 public:
-    BankAccount(const std::string& name_)
+    explicit BankAccount(const std::string& name_)
     : name(name_)
     {}
 
@@ -15,7 +15,7 @@ public:
     , balance(initial_amount)
     {}
 
-    void printStats()
+    void printStats() const
     {
         std::cout << "Account \"" << name << "\" - Balance: " << balance << " EUR" << std::endl;
     }
@@ -45,10 +45,11 @@ struct Command
 {
     virtual void call() = 0;
     virtual void undo() = 0;
+    virtual ~Command() = default;
 };
 
 
-class BankAccountCommand : Command
+class BankAccountCommand : public Command
 {
 public:
     enum class Action
@@ -140,9 +141,7 @@ struct CompositeBankAccountCommand : std::vector<BankAccountCommand>, Command
 
 struct DependentCompositeCommand : CompositeBankAccountCommand
 {
-    DependentCompositeCommand(const std::initializer_list<value_type>& items)
-    : CompositeBankAccountCommand(items)
-    {}
+    using CompositeBankAccountCommand::CompositeBankAccountCommand;
 
     // Breakes chain if a command fails
     void call() override
