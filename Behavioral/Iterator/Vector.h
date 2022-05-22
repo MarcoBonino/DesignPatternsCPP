@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <new>
 #include <utility>
 
 template <typename VECTOR>
@@ -12,7 +13,7 @@ public:
     using ReferenceType = ValueType&;
 
 public:
-    VectorIterator(PointerType ptr)
+    explicit VectorIterator(PointerType ptr)
     : m_ptr(ptr)
     {}
 
@@ -77,7 +78,7 @@ class Vector
 public:
     using ValueType = T;
     using Iterator = VectorIterator<Vector<T>>;
-public:
+
     Vector()
     {
         allocate(2);
