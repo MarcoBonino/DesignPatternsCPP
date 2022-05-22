@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include <sstream>  
+#include <sstream>
 #include <vector>
 
 class CPUCore
@@ -11,7 +11,9 @@ public:
         , freqMHz(freqMHz_)
     {
         std::cout << "Complex (and time consuming) operation to build a CPUCore...\n";
-    }   
+    }
+
+    virtual ~CPUCore() = default;
 
     void setFrequency(unsigned freqMHz_) { freqMHz = freqMHz_; }
     unsigned getFrequency() const { return freqMHz; }
@@ -44,13 +46,13 @@ public:
     // Fast: just copy all the values without any computation
     CPUCore64bit(const CPUCore64bit& other)
         : CPUCore(other)
+        , support32bit(other.support32bit)
     {
         std::cout << "CPUCore64bit copy-constructor!" << std::endl;
-        support32bit = other.support32bit;
     }
 
     std::string describe() const override
-    { 
+    {
         std::string regWidth;
         regWidth = support32bit ? " (64/32 bit)" : " (64 bit only)";
         return CPUCore::describe() + regWidth;
@@ -60,7 +62,7 @@ public:
     {
         return std::make_unique<CPUCore64bit>(*this);
     }
-    
+
 protected:
     bool support32bit;
 };
