@@ -5,13 +5,14 @@
 struct IceCream
 {
     virtual std::string describe() const = 0;
+    virtual ~IceCream() = default;
 };
 
 /* One IceCream concrete class */
 class SimpleIceCream : public IceCream
 {
 public:
-    SimpleIceCream(const std::string bowl_)
+    explicit SimpleIceCream(const std::string bowl_)
         : bowl(bowl_)
     {}
 
@@ -21,14 +22,14 @@ public:
     }
 
 private:
-    std::string bowl;
+    const std::string bowl;
 };
 
 /* Another IceCream concrete class */
 class MultiBowlIceCream : public IceCream
 {
 public:
-    MultiBowlIceCream(std::initializer_list<std::string> bowls_)
+    explicit MultiBowlIceCream(std::initializer_list<std::string> bowls_)
         : bowls(bowls_)
     {}
 

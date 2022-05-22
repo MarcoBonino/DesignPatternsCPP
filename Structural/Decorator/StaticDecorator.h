@@ -17,7 +17,7 @@ class IceCreamWithTopping : public T
 {
 public:
     template <typename ... ARGS>
-    IceCreamWithTopping(const std::string topping_, ARGS ... args)
+    IceCreamWithTopping(const std::string& topping_, ARGS ... args)
         : T(std::forward<ARGS>(args)...)
         , topping(topping_)
     {}
@@ -38,7 +38,7 @@ class IceCreamInCone : public T
 {
 public:
     template <typename ... ARGS>
-    IceCreamInCone(const std::string cone_, ARGS ... args)
+    IceCreamInCone(const std::string& cone_, ARGS ... args)
         : T(std::forward<ARGS>(args)...)
         , cone(cone_)
     {}

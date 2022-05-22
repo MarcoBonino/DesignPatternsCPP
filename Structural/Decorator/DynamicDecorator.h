@@ -10,7 +10,7 @@ namespace DynamicDecorator
 class IceCreamWithTopping : public IceCream
 {
 public:
-    IceCreamWithTopping(IceCream& iceCream_, const std::string topping_)
+    IceCreamWithTopping(IceCream& iceCream_, const std::string& topping_)
         : iceCream(iceCream_)
         , topping(topping_)
     {}
@@ -29,7 +29,7 @@ private:
 class IceCreamInCone : public IceCream
 {
 public:
-    IceCreamInCone(IceCream& iceCream_, const std::string cone_)
+    IceCreamInCone(IceCream& iceCream_, const std::string& cone_)
         : iceCream(iceCream_)
         , cone(cone_)
     {}
